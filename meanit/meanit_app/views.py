@@ -97,7 +97,7 @@ class search_view(View):
 
 class hashtag_view(View):
     def get(self,request,query):
-        posts = Post.objects.filter(hashtag__contains=query)
+        posts = Post.objects.filter(hashtag__contains=query+' ')
         return render(request,'hashtag_feed.html',{'hashtag':query,'posts': posts})
 
 

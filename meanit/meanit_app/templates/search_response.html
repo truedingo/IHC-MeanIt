@@ -30,7 +30,7 @@
 {% if hashtags %}
 <div>
     {% for h in hashtags %}
-        <p>#{{ h }}</p>
+        <a href="/hashtag/{{h}}"><p>#{{ h }}</p></a>
     {% endfor %}
 </div>
 {% else %}
