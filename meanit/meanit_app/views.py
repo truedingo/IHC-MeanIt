@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm
+from meanit_app.forms import SignUpForm, CreatePostForm
 from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
+from meanit_app.models import Profile, Post
+
+
 class home_view(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('mainpage')
         signup_form = SignUpForm()
         return render(request, 'home.html', {"signup_form": signup_form})
     
@@ -29,6 +34,37 @@ class home_view(View):
         else:
             print("Not valid!")
             return render(request, 'home.html', {"signup_form": signup_form})
+
+
+# Create your views here.
+class feed_view(View):
+    def get(self, request):
+        #todo user verification
+        posts = []
+        for i in range(3):
+            p = {'post_text': 'aas'}
+            posts.append(p)
+        return render(request, 'feed.html',posts )
+
+
+class post_view(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            createpost_form = CreatePostForm()
+            return render(request, 'create_post.html', {'createpost_form': createpost_form})
+        else:
+            return redirect('home')
+    def post(self, request):
+        createpost_form = CreatePostForm(request.POST, request.FILES)
+        if createpost_form.is_valid():
+            createpost_form = createpost_form.save(commit=False)
+            profile_user = request.user
+            createpost_form.profile_user = profile_user
+            createpost_form.save()
+        else:
+            print('failed')
+        return redirect('home')
+
 
 class main_page(View):
     def get(self, request):

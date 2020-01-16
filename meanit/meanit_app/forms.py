@@ -1,5 +1,5 @@
 from django import forms
-from meanit_app.models import Profile
+from meanit_app.models import Profile, Post
 from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class SignUpForm(forms.ModelForm):
         if pass1 != pass2:
             raise forms.ValidationError("The two password fields must match.")
         return cleaned_data
+
+
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('post_pic', 'post_text', 'hashtag')

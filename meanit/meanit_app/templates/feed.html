@@ -1,0 +1,11 @@
+<!doctype html>
+{% load static %}
+{% if posts %}
+    <ul>
+    {% for p in posts %}
+        <li>{{ post.post_text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}

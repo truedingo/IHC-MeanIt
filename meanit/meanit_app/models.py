@@ -15,7 +15,7 @@ class Profile(User):
         ordering = ('username', )
     
     def __str__(self):
-        return self.user.username
+        return self.username
 
 
 
@@ -46,11 +46,14 @@ class Message(models.Model):
 
 
 class Post(models.Model):
-    post_pic = models.CharField(max_length=512, blank=True, null=True)
+    post_pic = models.ImageField(upload_to = 'images')
     post_text = models.CharField(max_length=512, blank=True, null=True)
     hashtag = models.CharField(max_length=512, blank=True, null=True)
-    post_date = models.DateField(blank=True, null=True)
+    post_date = models.DateField(blank=True, null=True, auto_now_add=True)
     profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
+
+    def __str__(self):
+        return "User: " + self.profile_user.username + " Post ID: " + str(self.pk)
 
 
 class Questions(models.Model):

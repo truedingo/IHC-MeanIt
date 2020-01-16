@@ -1,0 +1,7 @@
+<!doctype html>
+{% load static %}
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{{createpost_form}}
+<button type="submit" class="btn btn-black">Create</button>
+</form>
