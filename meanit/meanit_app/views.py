@@ -8,7 +8,6 @@ from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 from meanit_app.models import Profile, Post
 
-
 class home_view(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -27,7 +26,8 @@ class home_view(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'main_page.html')
+                posts = Post.objects.all()
+                return render(request, 'main_page.html',{'posts': posts})
             else:
                 print("Error registering user")
                 return render(request, 'home.html', {"signup_form": signup_form})
@@ -41,10 +41,6 @@ class feed_view(View):
     def get(self, request):
         #todo user verification
         posts = Post.objects.all()
-        for p in posts:
-            print(p.post_pic)
-            print(p.post_text)
-            print('---------')
         return render(request, 'feed.html',{'posts': posts})
 
 
@@ -60,6 +56,16 @@ class post_view(View):
         if createpost_form.is_valid():
             createpost_form = createpost_form.save(commit=False)
             profile_user = request.user
+            hashtag = createpost_form.hashtag
+            h_list = hashtag.split(',')
+            print(h_list)
+            final = ''
+            for each in h_list:
+                if(each[0]!='#'):
+                    final += '#'+each+' '
+                else:
+                    final += each + ' '
+            createpost_form.hashtag = final
             createpost_form.profile_user = profile_user
             createpost_form.save()
         else:
@@ -69,7 +75,22 @@ class post_view(View):
 
 class main_page(View):
     def get(self, request):
-        return render(request, 'main_page.html')
+        posts = Post.objects.all()
+        return render(request, 'main_page.html', {'posts': posts})
+
+
+class search_view(View):
+    def get(self,request,query):
+        users = Profile.objects.filter(username__contains=query)
+        posts = Post.objects.filter(hashtag__contains=query)
+        hashtags = []
+        for each in posts:
+            for w in each.hashtag.split(' '):
+                print(w)
+                if query in w:
+                    hashtags.append(w)
+
+        return render(request,'search_response.html',{'users': users,'hashtags': hashtags})
 
 
 def logout_view(request):

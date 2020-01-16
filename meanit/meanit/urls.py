@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'logout/', views.logout_view, name='logout'),
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),
+    path('search/<slug:query>/', views.search_view.as_view(), name='search'),
 ]
 
 

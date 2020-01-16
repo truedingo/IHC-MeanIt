@@ -2,3 +2,15 @@
 {% load static %}
 {{ request.user }}
 <a href="{% url 'logout'%}">Logout</a>
+{% if posts %}
+<div>
+    {% for p in posts %}
+        <p>@{{p.profile_user.username}}</p>
+        <img src="/media/{{p.post_pic}}" height="400" width="360">
+        <p>{{p.post_text}}</p>
+        <p>{{p.hashtag}}</p>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}
