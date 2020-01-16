@@ -53,7 +53,7 @@ class Post(models.Model):
     profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
 
     def __str__(self):
-        return "User: " + self.profile_user.username + " Post ID: " + str(self.pk)
+        return "User: cx" + self.profile_user.username + " Post ID: " + str(self.pk)
 
 
 class Questions(models.Model):

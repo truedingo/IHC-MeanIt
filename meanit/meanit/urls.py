@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from meanit_app import views
+from meanit import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,3 +28,7 @@ urlpatterns = [
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),
 ]
+
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

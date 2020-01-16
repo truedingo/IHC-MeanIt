@@ -1,11 +1,13 @@
 <!doctype html>
-{% load static %}
 {% if posts %}
-    <ul>
+<div>
     {% for p in posts %}
-        <li>{{ post.post_text }}</li>
+        <p>@{{p.profile_user.username}}</p>
+        <img src="/media/{{p.post_pic}}" height="400" width="360">
+        <p>{{p.post_text}}</p>
+        <p>#{{p.hashtag}}</p>
     {% endfor %}
-    </ul>
+</div>
 {% else %}
     <p>No posts are available.</p>
 {% endif %}

@@ -40,11 +40,12 @@ class home_view(View):
 class feed_view(View):
     def get(self, request):
         #todo user verification
-        posts = []
-        for i in range(3):
-            p = {'post_text': 'aas'}
-            posts.append(p)
-        return render(request, 'feed.html',posts )
+        posts = Post.objects.all()
+        for p in posts:
+            print(p.post_pic)
+            print(p.post_text)
+            print('---------')
+        return render(request, 'feed.html',{'posts': posts})
 
 
 class post_view(View):
