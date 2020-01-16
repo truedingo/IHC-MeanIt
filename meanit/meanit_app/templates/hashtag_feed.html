@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{Hashtag}}</title>
+</head>
+<body>
+<h2>{{hashtag}}</h2>
+<div>
+    {% for p in posts %}
+        <p>@{{p.profile_user.username}}</p>
+        <img src="/media/{{p.post_pic}}" height="400" width="360">
+        <p>{{p.post_text}}</p>
+        <p>{{p.hashtag}}</p>
+    {% endfor %}
+</div>
+</body>

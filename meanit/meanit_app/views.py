@@ -62,7 +62,7 @@ class post_view(View):
             final = ''
             for each in h_list:
                 if(each[0]!='#'):
-                    final += '#'+each+' '
+                    final += ''+each+' '
                 else:
                     final += each + ' '
             createpost_form.hashtag = final
@@ -86,11 +86,19 @@ class search_view(View):
         hashtags = []
         for each in posts:
             for w in each.hashtag.split(' '):
-                print(w)
-                if query in w:
-                    hashtags.append(w)
+                if query in w and w[1:] not in hashtags:
+                    print(w)
+                    print(hashtags)
+                    print('----------')
+                    hashtags.append(w[1:])
 
-        return render(request,'search_response.html',{'users': users,'hashtags': hashtags})
+        return render(request,'search_response.html',{'query': query,'users': users,'hashtags': hashtags})
+
+
+class hashtag_view(View):
+    def get(self,request,query):
+        posts = Post.objects.filter(hashtag__contains=query)
+        return render(request,'hashtag_feed.html',{'hashtag':query,'posts': posts})
 
 
 def logout_view(request):

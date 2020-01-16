@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),
     path('search/<slug:query>/', views.search_view.as_view(), name='search'),
+    path('hashtag/<slug:query>/', views.hashtag_view.as_view(), name='hashtag'),
 ]
 
 
