@@ -19,8 +19,14 @@ class SignUpForm(forms.ModelForm):
             raise forms.ValidationError("The two password fields must match.")
         return cleaned_data
 
-
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('post_pic', 'post_text', 'hashtag')
+
+class UserEditForm(forms.Form):
+    new_username = forms.CharField(label='New Username', widget=forms.TextInput(attrs={'class': "form-control"}),)
+    new_email = forms.EmailField(label='New Email', widget=forms.TextInput(attrs={'class': "form-control"}),)
+    old_password = forms.CharField(label="Old Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
+    new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
+

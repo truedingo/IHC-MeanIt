@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^post', views.post_view.as_view(), name='post'),
     path('search/<slug:query>/', views.search_view.as_view(), name='search'),
     path('hashtag/<slug:query>/', views.hashtag_view.as_view(), name='hashtag'),
+    url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser')
 ]
 
 
