@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm, CreatePostForm, UserEditForm
+from meanit_app.forms import SignUpForm, CreatePostForm, UserEditForm, QuestionForm
 from django.contrib.auth.hashers import make_password, check_password
+from django.forms import formset_factory
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post
+from meanit_app.models import Profile, Post, Questions
 
 class home_view(View):
     def get(self, request):
@@ -105,7 +106,11 @@ class useredit_page(View):
         if not request.user.is_authenticated:
             return redirect('home')
         user_edit_form = UserEditForm()
-        return render(request, 'profile_page.html', {"user_edit_form": user_edit_form})
+        posts = Post.objects.all()
+        q = Questions.objects.all()
+        form = formset_factory(QuestionForm)
+        question_form = form(initial = q)
+        return render(request, 'profile_page.html', {"user_edit_form": user_edit_form, 'posts': posts, 'question_form': question_form})
 
     def post(self, request):
         user_edit_form = UserEditForm(request.POST)

@@ -35,6 +35,7 @@ class Follow(models.Model):
 
 class MeanitUserQuestions(models.Model):
     profile_user = models.OneToOneField('Profile', models.CASCADE, primary_key=True)
+    question = models.ForeignKey('Questions', on_delete = models.PROTECT, default = '')
 
 
 class Message(models.Model):
@@ -59,3 +60,6 @@ class Post(models.Model):
 class Questions(models.Model):
     question_name = models.CharField(unique=True, max_length=512)
     question_answer = models.CharField(max_length=512, blank=True, null=True)
+
+    def __str__(self):
+        return self.question_name

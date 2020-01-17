@@ -1,5 +1,5 @@
 from django import forms
-from meanit_app.models import Profile, Post
+from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions
 from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):
@@ -30,3 +30,7 @@ class UserEditForm(forms.Form):
     old_password = forms.CharField(label="Old Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
     new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
 
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Questions
+        fields = ('question_name', 'question_answer')
