@@ -35,6 +35,7 @@ class Follow(models.Model):
 
 class MeanitUserQuestions(models.Model):
     profile_user = models.OneToOneField('Profile', models.CASCADE, primary_key=True)
+
     question = models.ForeignKey('Questions', on_delete = models.PROTECT, default = '')
 
 
