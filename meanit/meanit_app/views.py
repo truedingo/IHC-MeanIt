@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post
+from meanit_app.models import Profile, Post, Follow
 
 class home_view(View):
     def get(self, request):
@@ -78,10 +78,9 @@ class post_view(View):
         createpost_form = CreatePostForm(request.POST, request.FILES)
         if createpost_form.is_valid():
             createpost_form = createpost_form.save(commit=False)
-            profile_user = request.user
+            profile_user = Profile.objects.get(username = request.user)
             hashtag = createpost_form.hashtag
             h_list = hashtag.split(',')
-            print(h_list)
             final = ''
             for each in h_list:
                 if(each[0]!='#'):
@@ -159,9 +158,12 @@ def logout_view(request):
     return redirect('home')
 
 class profile_view(View):
-    def get(self, request):
-        posts_query = Post.objects.filter(profile_user=request.user)
-        return render(request, 'my_profile.html', {'posts': posts_query})
+    def get(self, request,query):
+        user = Profile.objects.get(username=query)
+        posts_query = Post.objects.all().filter(profile_user=user)
+        p = Profile.objects.get(username = request.user)
+        following = True if Follow.objects.all().filter(profile_user=p,username=query) else False
+        return render(request, 'profile.html', {'posts': posts_query, 'username':query, 'following': following})
 
 
 
@@ -193,3 +195,17 @@ class useredit_page(View):
             print('erro')
             return redirect('home')
         
+
+class followuser_view(View):
+    def get(self, request,query):
+        if not request.user.is_authenticated:
+            return redirect('home')
+        p = Profile.objects.get(username = request.user)
+        following = Follow.objects.all().filter(profile_user = p,username = query)
+        if(len(following)==0):
+            Follow(hashtag=None,username=query,profile_user =p).save()
+            return redirect('profile', query=query)
+
+        else:
+            following.delete()
+            return redirect('profile',query=query)

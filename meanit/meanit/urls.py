@@ -30,9 +30,11 @@ urlpatterns = [
     url(r'^post', views.post_view.as_view(), name='post'),
     path('search/<slug:query>/', views.search_view.as_view(), name='search'),
     path('hashtag/<slug:query>/', views.hashtag_view.as_view(), name='hashtag'),
-    url(r'^my_profile', views.profile_view.as_view(), name='myprofile'),
+    path('user/<slug:query>/', views.profile_view.as_view(), name='profile'),
     url(r'^signup', views.signup_view.as_view(), name='signup'),
-    url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser')
+    url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser'),
+    path('followuser/<slug:query>/', views.followuser_view.as_view(), name='hashtag'),
+
 ]
 
 
