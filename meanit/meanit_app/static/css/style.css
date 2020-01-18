@@ -27,6 +27,7 @@
     color: gray;
     font-size: 20pt;
 }
+
 #login_caixa{
     width: 90%;
     margin: 5% 5% 3% 5%;
@@ -110,8 +111,8 @@
 .search{
     display: inline-block;
     position: relative;
-    height: 40px;
-    padding: 10px 10px;
+    height: 70px;
+    padding: 10px 40px;
 }
 .mais, .sino, .msg, .utilizador{
     float: right;
@@ -122,6 +123,7 @@
     padding: 10px 10px;
     margin: 10px 10px;
     width:85px;
+    font-weight: bold;
 }
 .utilizador>a:visited{
     color: white;
@@ -182,7 +184,7 @@
 }
 
 .item1{
-    height: 490px;
+    height: 500px;
     width: 590px;
 }
 .publicacao{
@@ -193,7 +195,7 @@
     margin: 20px;
     height: 90%;
     position: relative;
-    top: 80;
+    top: 120px;
     display: grid;
     grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
     grid-gap: 5%;
@@ -257,6 +259,7 @@ b{
 }
 .nome_perfil{
     text-align: center;
+    font-size: 26px;
 }
 @media only screen and (max-width: 527px) {
     .publicacao{
@@ -271,7 +274,7 @@ b{
     margin: 20px;
     height: 90%;
     position: relative;
-    top: 150px;
+    top: 170px;
     display: grid;
     grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
     grid-gap: 5%;
@@ -284,4 +287,61 @@ b{
     color: gray;
     font-size: 20px;
     font-weight: bold;
+}
+
+.quote{
+    padding: 20px;
+}
+.initial {
+    position: absolute;
+    width: 590px;
+    top:100px;
+    text-align: left;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 26px;
+    color: #696969; 
+}
+
+.author {
+    position: relative;
+    width: 590px;
+    top:150px;
+    text-align: left;
+    font-family: Helvetica;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: lighter;
+color: #696969; 
+}
+
+.inbox{
+    width: 590px;
+}
+.mensagem{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    position: relative;
+    top: 80;
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-gap: 5%;
+}
+.texto_msg{
+    grid-column-start: 1;
+    grid-column-end: 11;
+}
+@media only screen and (max-width: 527px) {
+    .mensagem{
+        top: 150;
+    }
+}
+@media only screen and (max-width: 652px) {
+    .inbox{
+       width: 100% 
+    }
 }
