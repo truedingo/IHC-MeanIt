@@ -123,6 +123,34 @@ class hashtag_view(View):
         posts = Post.objects.filter(hashtag__contains=query+' ')
         return render(request,'hashtag_feed.html',{'hashtag':query,'posts': posts})
 
+class useredit_page(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('home')
+        user_edit_form = UserEditForm()
+        return render(request, 'profile_page.html', {"user_edit_form": user_edit_form})
+
+    def post(self, request):
+        user_edit_form = UserEditForm(request.POST)
+        user = request.user
+        if user_edit_form.is_valid() and user.check_password(user_edit_form.data['old_password']):
+            username = user_edit_form.data['new_username']
+            password = user_edit_form.data['new_password']
+            user.password = make_password(user_edit_form.data['new_password'])
+            user.username = user_edit_form.data['new_username']
+            user.email = user_edit_form.data['new_email']
+            user.save()
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return redirect('edituser')
+        else:
+            #meter erro aqui
+            print('erro')
+            return redirect('home')
+
 
 def logout_view(request):
     logout(request)

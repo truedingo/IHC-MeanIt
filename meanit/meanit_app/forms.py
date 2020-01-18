@@ -19,7 +19,6 @@ class SignUpForm(forms.ModelForm):
             raise forms.ValidationError("The two password fields must match.")
         return cleaned_data
 
-
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
