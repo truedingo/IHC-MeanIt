@@ -28,3 +28,10 @@ class CreatePostForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.EmailField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "caixa1", 'placeholder': 'password'}))
+
+
+class UserEditForm(forms.Form):
+    new_username = forms.CharField(label='New Username', widget=forms.TextInput(attrs={'class': "form-control"}),)
+    new_email = forms.EmailField(label='New Email', widget=forms.TextInput(attrs={'class': "form-control"}),)
+    old_password = forms.CharField(label="Old Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
+    new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
