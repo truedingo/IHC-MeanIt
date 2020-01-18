@@ -25,7 +25,7 @@ class CreatePostForm(forms.ModelForm):
         fields = ('post_pic', 'post_text', 'hashtag')
 
 class LoginForm(forms.Form):
-    username = forms.EmailField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "caixa1", 'placeholder': 'password'}))
 
 

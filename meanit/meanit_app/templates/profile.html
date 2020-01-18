@@ -1,8 +1,15 @@
 <!doctype html>
 {% load static %}
-@{{ request.user }}
-{%if posts %}
+@{{ username }}
 <div>
+    {% if following%}
+    <p>icon de follow </p>
+    {% else %}
+    <p>ou unfollow</p>
+    {% endif %}
+    {% if request.user == username %}
+    <p>edit perfil aqui aqui</p>
+    {% endif %}
     {% for p in posts %}
         <p>@{{p.profile_user.username}}</p>
         <img src="/media/{{p.post_pic}}" height="400" width="360">
@@ -10,6 +17,4 @@
         <p>{{p.hashtag}}</p>
     {% endfor %}
 </div>
-{% else %}
-    <p>No posts are available.</p>
-{% endif %}
+
