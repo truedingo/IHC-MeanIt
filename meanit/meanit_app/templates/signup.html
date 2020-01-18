@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>mean.it</title>
+</head>
+
+<body>
+    <div id="logo">
+        <image id="meanit_cinza" src="{% static "/images/meanit_cinzadi.png" %}" width=100%></image>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div id="login">
+            <div id="login_caixa">
+                {{ signup_form.username }}
+                <br><br>
+                {{ signup_form.email }}
+                <br><br>
+                {{ signup_form.birthday }}
+                <br><br>
+                {{ signup_form.password }}
+                <br><br>
+                {{ signup_form.password_check }}
+            </div>
+            <div id="login_botoes">
+                <a><input id="login_botao" class="botao1" type="submit" value="Sign up"></a>
+                <a href="{% url 'home'%}"><input id="signup_botao" class="botao1" type="button" value="Log in"></a>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm, CreatePostForm
+from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm
 from django.contrib.auth.hashers import make_password, check_password
 
 
@@ -11,10 +11,33 @@ from meanit_app.models import Profile, Post
 class home_view(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('mainpage')
-        signup_form = SignUpForm()
-        return render(request, 'home.html', {"signup_form": signup_form})
+            return redirect('feed')
+        else:
+            login_form = LoginForm()
+            return render(request, 'home.html', {"login_form": login_form})
     
+    def post(self, request):
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('feed')
+            else:
+                return redirect('home')
+        else:
+            return render(request, 'home.html', {"login_form": login_form})
+
+class signup_view(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('feed')
+        else:
+            signup_form = SignUpForm()
+            return render(request, 'signup.html', {'signup_form': signup_form})
+
     def post(self, request):
         signup_form = SignUpForm(request.POST)
         if signup_form.is_valid():
@@ -26,14 +49,14 @@ class home_view(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                posts = Post.objects.all()
-                return render(request, 'main_page.html',{'posts': posts})
+                return redirect('feed')
             else:
-                print("Error registering user")
-                return render(request, 'home.html', {"signup_form": signup_form})
+                return redirect('signup')
         else:
-            print("Not valid!")
-            return render(request, 'home.html', {"signup_form": signup_form})
+            return render(request, 'signup.html', {'signup_form': signup_form})
+
+
+
 
 
 # Create your views here.
@@ -106,4 +129,9 @@ def logout_view(request):
     signup_form = SignUpForm()
     print("Logged out!")
     return redirect('home')
+
+class profile_view(View):
+    def get(self, request):
+        posts_query = Post.objects.filter(profile_user=request.user)
+        return render(request, 'my_profile.html', {'posts': posts_query})
         
