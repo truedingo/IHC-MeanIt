@@ -64,7 +64,7 @@ class feed_view(View):
     def get(self, request):
         #todo user verification
         posts = Post.objects.all()
-        return render(request, 'new_feed.html',{'posts': posts})
+        return render(request, 'feed.html',{'posts': posts})
 
 
 class post_view(View):
