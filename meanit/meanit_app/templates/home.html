@@ -1,9 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 {% load static %}
-<form method="post">
-{% csrf_token %}
-{{signup_form}}
-<button type="submit" class="btn btn-black">Register</button>
-</form>
+<html>
 
+<head>
+    <title>mean.it</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 
+<body>
+    <div id="logo">
+        <image id="meanit_cinza" src="{% static "/images/meanit_cinzadi.png" %}" width=100%></image>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div id="login">
+            <div id="login_caixa">
+                {{ login_form.username }}
+                <br><br>
+                {{ login_form.password }}
+            </div>
+            <div id="login_botoes">
+                <a href="{% url 'signup'%}"><input id="signup_botao" class="botao1" type="button" value="Sign up"></a>
+                <a><input id="login_botao" class="botao1" type="submit" value="Log in"></a>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

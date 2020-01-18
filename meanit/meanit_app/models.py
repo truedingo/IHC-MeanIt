@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 
 
 class Profile(User):
+    birthday = models.DateField()
     class Meta:
-        proxy = True
         ordering = ('username', )
     
     def __str__(self):
