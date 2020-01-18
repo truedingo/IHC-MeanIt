@@ -1,0 +1,24 @@
+<!doctype html>
+{% load static %}
+<form method="post">
+{% csrf_token %}
+{{user_edit_form}}
+<button type="submit" class="btn btn-black">Edit User</button>
+</form>
+
+
+{% if posts %}
+<div>
+    {% for p in posts %}
+    	{%if request.user == p.profile_user %}
+        	<p>@{{p.profile_user.username}}</p>
+        	<img src="/media/{{p.post_pic}}" height="400" width="360">
+        	<p>{{p.post_text}}</p>
+        	<p>{{p.hashtag}}</p>
+    	{% endif %}
+    {% endfor %}
+</div>
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}
+<a href="{% url 'mainpage'%}">Back to HomePage</a>
