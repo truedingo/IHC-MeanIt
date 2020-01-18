@@ -35,12 +35,9 @@ class Follow(models.Model):
 
 class MeanitUserQuestions(models.Model):
     profile_user = models.OneToOneField('Profile', models.CASCADE, primary_key=True)
-<<<<<<< HEAD
+
     question = models.ForeignKey('Questions', on_delete = models.PROTECT, default = '')
 
-=======
-    question = models.OneToOneField('Questions', models.PROTECT, default='')
->>>>>>> branchartur2
 
 class Message(models.Model):
     to_msg = models.CharField(unique=True, max_length=512)
