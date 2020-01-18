@@ -5,11 +5,7 @@
 {{user_edit_form}}
 <button type="submit" class="btn btn-black">Edit User</button>
 </form>
-<form method="post">
-{% csrf_token %}
-{{question_form}}
-<button type="submit" class="btn btn-black">Pick Question</button>
-</form>
+
 
 {% if posts %}
 <div>
