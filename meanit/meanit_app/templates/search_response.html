@@ -1,39 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Search</title>
-</head>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <body>
 <h2>{{query}}</h2>
 {% if users %}
-<div>
+<div class="publicacao">
     {% for u in users %}
-        <p>@{{u.username}}</p>
+        <a href="user/{{u.username}}"><p>@{{u.username}}</p></a>
     {% endfor %}
 </div>
 {% else %}
     <p>No users found</p>
 {% endif %}
-{% if posts %}
-<div>
-    {% for p in posts %}
-        <p>@{{p.profile_user.username}}</p>
-        <img src="/media/{{p.post_pic}}" height="400" width="360">
-        <p>{{p.post_text}}</p>
-        <p>#{{p.hashtag}}</p>
-    {% endfor %}
-</div>
-{% else %}
-    <p>No posts found</p>
-{% endif %}
-{% if hashtags %}
-<div>
     {% for h in hashtags %}
         <a href="/hashtag/{{h}}"><p>#{{ h }}</p></a>
     {% endfor %}
 </div>
-{% else %}
-    <p>No hashtags found</p>
-{% endif %}
 </body>
+{% endblock %}

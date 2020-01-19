@@ -8,7 +8,7 @@ from django.contrib import messages
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post, Questions, Comments, MeanitUserQuestions, Message
+from meanit_app.models import Profile, Post, Questions, Comments, MeanitUserQuestions, Message,Follow
 class home_view(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -119,16 +119,15 @@ class main_page(View):
 
 
 class search_view(View):
-    def get(self,request,query):
+    def post(self,request):
+        print("TOU NA VBIEW")
+        query = request.POST['search_result']
         users = Profile.objects.filter(username__contains=query)
         posts = Post.objects.filter(hashtag__contains=query)
         hashtags = []
         for each in posts:
             for w in each.hashtag.split(' '):
                 if query in w and w[1:] not in hashtags:
-                    print(w)
-                    print(hashtags)
-                    print('----------')
                     hashtags.append(w[1:])
 
         return render(request,'search_response.html',{'query': query,'users': users,'hashtags': hashtags})
