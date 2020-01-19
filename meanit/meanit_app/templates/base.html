@@ -21,6 +21,9 @@
             <div class="utilizador">
                 <a href="{% url 'profile' request.user %}">@{{ request.user.username }}</a>
             </div>
+            <div class="logout">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
             <div class="msg">
                 <a href="inbox.html"> <img src="{% static "/images/caixadi.png" %}" width=40px> </a>
             </div>
@@ -37,4 +40,5 @@
     {% block content %}
     {% endblock %}
 </body>
+
 </html>

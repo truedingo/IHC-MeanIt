@@ -24,7 +24,6 @@ from meanit import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view.as_view(), name='home'),
-    url(r'^main_page', views.main_page.as_view(), name='mainpage'),
     url(r'logout/', views.logout_view, name='logout'),
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),

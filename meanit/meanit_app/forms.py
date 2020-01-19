@@ -23,6 +23,7 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('post_pic', 'post_text', 'hashtag')
+        widgets = {'post_text': forms.Textarea(attrs={'id': 'input-txt'})}
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))

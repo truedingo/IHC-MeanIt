@@ -59,8 +59,14 @@ class signup_view(View):
 # Create your views here.
 class feed_view(View):
     def get(self, request):
-        #todo user verification
         posts = Post.objects.all()
+        '''profile_user = Profile.objects.get(username=request.user)
+        follow_list = Follow.objects.filter(profile_user=profile_user)
+        for followers in follow_list:
+            prof = Profile.objects.get(profile_user=followers.username)
+            hashtag = follow_list.hashtag
+            follow_post = Post.objects.filter()
+        '''
         return render(request, 'new_feed.html',{'posts': posts})
 
 
@@ -74,28 +80,30 @@ class post_view(View):
     def post(self, request):
         createpost_form = CreatePostForm(request.POST, request.FILES)
         if createpost_form.is_valid():
-            createpost_form = createpost_form.save(commit=False)
             profile_user = Profile.objects.get(username = request.user)
-            hashtag = createpost_form.hashtag
-            h_list = hashtag.split(',')
+            createpost_form = createpost_form.save(commit=False)
             final = ''
-            for each in h_list:
-                if(each[0]!='#'):
-                    final += ''+each+' '
-                else:
-                    final += each + ' '
+            if '#1' in request.POST:
+                h1 = request.POST['#1']
+                final+= '#'+h1
+            if '#2' in request.POST:
+                h2 = request.POST['#2']
+                final+= ', #'+h2
+            if '#3' in request.POST:
+                h3 = request.POST['#3']
+                final+= ', #'+h3
+            if '#4' in request.POST:
+                h4 = request.POST['#4']
+                final+= ', #'+h4
+            if '#5' in request.POST:
+                h5 = request.POST['#5']
+                final+= ', #'+h5
             createpost_form.hashtag = final
             createpost_form.profile_user = profile_user
             createpost_form.save()
+            return redirect('feed')
         else:
-            print('failed')
-        return redirect('home')
-
-
-class main_page(View):
-    def get(self, request):
-        posts = Post.objects.all()
-        return render(request, 'main_page.html', {'posts': posts})
+            return redirect('post')
 
 
 class search_view(View):
