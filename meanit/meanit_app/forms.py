@@ -1,5 +1,5 @@
 from django import forms
-from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions
+from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions, Comments
 from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):

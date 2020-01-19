@@ -4,10 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.forms import formset_factory
+from django.contrib import messages
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post, Questions
+from meanit_app.models import Profile, Post, Questions, Comments
 
 class home_view(View):
     def get(self, request):
@@ -90,12 +91,16 @@ class post_view(View):
                 else:
                     final += each + ' '
             createpost_form.hashtag = final
-            createpost_form.profile_user = profile_user
+            createpost_form.profile_user = Profile.objects.filter(username=request.user).first()
             createpost_form.save()
         else:
             print('failed')
         return redirect('home')
 
+class onepost_view(View):
+    def get(self, request, query):
+        post = Post.objects.filter(pk=query).first()
+        return render(request, 'post.html', {'post':post})
 
 class main_page(View):
     def get(self, request):
@@ -132,6 +137,12 @@ class useredit_page(View):
         question_form = QuestionForm()
         answer_form = CreateMeanitQuestionForm()
         user_edit_form = UserEditForm()
+
+        for post in Post.objects.filter(profile_user=request.user):
+            for comment in Comments.objects.filter(original_post=post):
+                if comment.cmnt_read == False:
+                    messages.add_message(request, messages.INFO, str(post.pk))
+            
         return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form, "answer_form": answer_form})
 
     def post(self, request):

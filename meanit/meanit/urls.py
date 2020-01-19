@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'logout/', views.logout_view, name='logout'),
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),
+    path('viewpost/<slug:query>/', views.onepost_view.as_view(), name='onepost'),
     path('search/<slug:query>/', views.search_view.as_view(), name='search'),
     path('hashtag/<slug:query>/', views.hashtag_view.as_view(), name='hashtag'),
     url(r'^my_profile', views.profile_view.as_view(), name='myprofile'),

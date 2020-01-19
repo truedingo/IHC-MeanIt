@@ -2,11 +2,23 @@
 {% load static %}
 
 <body>
-<form method="post">
-{% csrf_token %}
-{{ question_form }}
-{{ answer_form }}
-<button type="submit">Pick Question</button>
-</form>
+	
+	{%if messages %}
+	<ul class = "messages">
+		{% for msg in messages %}
+		<li>
+			<div class="alert alert -{{msg.level_tag}}" role="alert">
+				<a href="/viewpost/{{msg.message}}">{{msg.message}}</a>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+	{%endif%}
+	<form method="post">
+	{% csrf_token %}
+	{{ question_form }}
+	{{ answer_form }}
+	<button type="submit">Pick Question</button>
+	</form>
 </body>
 

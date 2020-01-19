@@ -24,7 +24,8 @@ class Comments(models.Model):
     post_text = models.CharField(max_length=512, blank=True, null=True)
     cmnt_read = models.BooleanField(blank=True, null=True)
     cmnt_date = models.BooleanField(blank=True, null=True)
-    profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
+    profile_comment = models.ForeignKey('Profile', on_delete = models.CASCADE)
+    original_post = models.ForeignKey('Post', on_delete = models.CASCADE, default = '')
 
 
 class Follow(models.Model):
