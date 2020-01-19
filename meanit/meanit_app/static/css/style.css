@@ -5,7 +5,7 @@
 #logo {
     margin: auto;
     width: 50%;
-    top: 150px;
+    top: 50px;
     position: relative;
 }
 #login {
@@ -13,7 +13,7 @@
     width: 50%;
     border: 1px solid lightgray;
     border-radius: 30px;
-    top: 150px;
+    top: 60px;
     position: relative;
 }
 
@@ -29,6 +29,7 @@
 }
 
 #login_caixa{
+    position: relative;
     width: 90%;
     margin: 5% 5% 3% 5%;
 }
@@ -74,14 +75,18 @@
     .caixa1{
         font-size: 5vw;
     }
+
+    .new_message{
+        font-size: 5vw;
+    }
     
 }
 
 /*header inicio*/
 .nav{
-    background-color: black;
-    opacity: 0.1;
-    height: 60px;
+    background-color: grey;
+    opacity: 0.35;
+    height: 65px;
     position: fixed;
     width: 100%;
     z-index: 999;
@@ -92,7 +97,7 @@
     display: inline-block;
 }
 .lupa, .mais, .sino, .msg, .utilizador{
-    width: 40px;
+    width: 10px;
     display: inline-block;
 }
 .procura{
@@ -103,28 +108,52 @@
     border-top: none;
     font-size: 20pt;
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    margin-left: 30px;
     position: relative;
-    bottom: 10px;
+    bottom: 12px;
     
 }
 .search{
     display: inline-block;
     position: relative;
     height: 70px;
-    padding: 10px 40px;
+    padding: 10px 35px;
 }
-.mais, .sino, .msg, .utilizador{
-    float: right;
-    padding: 10px 10px;
+.mais, .sino, .msg{
+    position: relative;
+    padding: 2px 30px;
+    bottom: 142px;
+    left: 965px;
 }
 .utilizador{
     color: white;
-    padding: 10px 10px;
-    margin: 10px 10px;
+    position: relative;
+    padding: 10px 20px;
+    margin: 10px 45px;
     width:85px;
+    bottom: 10px;
+    left: 565px;
     font-weight: bold;
 }
+.logout{
+    color: white;
+    position: relative;
+    padding: 10px 8px;
+    margin: 10px 25px;
+    width:85px;
+    bottom: 88px;
+    left: 1300px;
+    font-weight: bold;
+}
+
+.logout>a:visited{
+    color: white;
+}
+.logout>a:link{
+    color:white;
+}
+
 .utilizador>a:visited{
     color: white;
 }
@@ -179,6 +208,7 @@
 /*header fim*/
 /* feed de noticias inicio*/
 .grelha{
+    position: relative;
     margin: auto;
     width: 590;
 }
@@ -186,6 +216,16 @@
 .item1{
     height: 500px;
     width: 590px;
+    bottom:70px;
+    right: 320px;
+}
+
+.item1_profile{
+    position: relative;
+    height: 500px;
+    width: 590px;
+    bottom:70px;
+    right: 320px;
 }
 .publicacao{
     background-color: white;
@@ -258,8 +298,9 @@ b{
     text-overflow: ellipsis;
 }
 .nome_perfil{
-    text-align: center;
+    position: relative;
     font-size: 26px;
+    right: 300px;
 }
 @media only screen and (max-width: 527px) {
     .publicacao{
@@ -280,11 +321,11 @@ b{
     grid-gap: 5%;
 }
 .div_nome{
-    position: absolute;
+    position: relative;
     width: 590px;
     margin: auto;
     top:100px;
-    color: gray;
+    color: #696969;
     font-size: 20px;
     font-weight: bold;
 }
@@ -319,7 +360,7 @@ color: #696969;
 .inbox{
     width: 590px;
 }
-.mensagem{
+.Message{
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 30px;
@@ -335,8 +376,61 @@ color: #696969;
     grid-column-start: 1;
     grid-column-end: 11;
 }
+
+.inbox_text{
+    position: relative;  
+    text-align: left;
+    font-family: Helvetica;
+    font-style: normal;
+    font-size: 24px;
+    top: 80px;
+    text-align: center;
+    margin: auto;
+    padding-left: 160px;
+    font-weight: bold;
+    color: #696969; 
+    display: inline-block;
+}
+
+.inbox_text>a:visited{
+    color: #696969;
+}
+.inbox_text>a:link{
+    color: #696969;
+}
+.inbox_text>a:hover{
+    color:lightgray;
+}
+
+.new_msg_text{
+    position: relative;  
+    text-align: left;
+    font-family: Helvetica;
+    font-style: normal;
+    font-size: 24px;
+    top: 80px;
+    text-align: center;
+    margin: auto;
+    padding-left: 50px;
+    font-weight: bold;
+    color: #696969; 
+    display: inline-block;
+
+}
+
+.new_msg_text>a:visited{
+    color: #696969;
+}
+.new_msg_text>a:link{
+    color: #696969;
+}
+.new_msg_text>a:hover{
+    color:lightgray;
+}
+
+
 @media only screen and (max-width: 527px) {
-    .mensagem{
+    .Message{
         top: 150;
     }
 }
@@ -344,4 +438,201 @@ color: #696969;
     .inbox{
        width: 100% 
     }
+}
+
+.new_message{
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    text-align: left;
+    color: gray;
+    font-size: 12pt;
+    padding-top: 11px;
+}
+
+.to{
+    position: relative;
+    color: gray;
+    font-size: 12pt;
+    top: -5px;
+    left: 30px;
+    padding-top: 4px;
+}
+
+
+.frame_new_msg{
+    background-color: white;
+    border: 1px solid darkgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    position: relative;
+    top: 80;
+    height: 550;
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-gap: 5%;
+}
+
+#send_msg_btn{
+    position: relative;
+    background-color: lightgray;
+    top: 490px;
+    left: 50px;
+    width: 300px;
+}
+
+.upload_img{
+    position: relative;
+    padding: 20px;
+    border: 1px solid lightgray;
+    margin: 20px;
+    border-radius: 30px;
+    position: relative;
+    top: 150px;
+    background-color: lightgray;
+}
+#up-img{
+    position: relative;
+    font-size: 9pt;
+    color:#696969;
+    text-align: center;
+    width: 100%;
+    height: 20px;
+    margin: auto;
+    border: none;
+    font-weight: bold;
+    color: darkgray;
+}
+.hash{
+    width: 80%;
+    background-color: lightgray;
+    border: none;
+    border-bottom: 1pt white solid;
+    color: white;
+}
+.input-txt{
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 0px 0px;
+    overflow: hidden;
+    width: 90%;
+    height: 325px;
+    bottom: 375px;
+    left: 20px;
+    display: inline-block;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    padding: 5%;
+}
+#input-txt{
+    position: relative;
+    border: none;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+    color: gray;
+}
+.publicacao2{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    height: 90%;
+    position: relative;
+    top: 80;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-gap: 5%;
+}
+@media only screen and (max-width: 527px) {
+    .publicacao2{
+        top: 150;
+    }
+}
+.item2{
+    position: absolute;
+    top: 50px;
+    height: 570px;
+    width: 590px;
+}
+@media only screen and (max-width: 652px) {
+    .item2{
+       width: 100% 
+    }
+}
+.pub-hashtags2{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 90px;
+    left: 12px;
+}
+.botao2{
+    height: 50px;
+    width: 30%;
+    margin: 0px 5px;
+    border: 1px solid white;
+    border-radius: 20px;
+    color: white;
+    font-size: 14pt;
+    position: relative;
+    bottom: 20px;
+}
+#publish{
+    position: relative;
+    bottom: 330px;
+    background-color: gray;
+    display: inline-block;
+}
+#cancel{
+    background-color: lightgray;
+    bottom: 330px;
+    display: inline-block;
+}
+.pub-imagem2{
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 0px 0px;
+    overflow: hidden;
+    width: 100%;
+    height: 390px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.btn_post{
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+.pub-hashtag2{
+    padding: 5px;
+    background-color: lightgray;
+    color: white;
+    border-radius: 20px;  
+    width: -webkit-fit-content;
+    height: -webkit-fit-content;
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+    display: inline-block;
+    width: 16%;
+    float: right;
+    margin: 0px 0px 0px 5px;
+}
+
+.Quick_questions_tittle{
+    position: absolute;
+    font-size: 26px;
+    left: 525px;
+    width: 100%;
+    bottom: 4px;
+}
+
+.create_new_post{
+    position: relative;
+    font-size: 26px;
+    text-align: center;
+    margin: auto;
 }
