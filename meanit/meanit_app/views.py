@@ -85,21 +85,15 @@ class post_view(View):
             createpost_form = createpost_form.save(commit=False)
             final = ''
             if '#1' in request.POST:
-                h1 = request.POST['#1']
-                final+= '#'+h1
+                createpost_form.hashtag = request.POST['#1']
             if '#2' in request.POST:
-                h2 = request.POST['#2']
-                final+= ', #'+h2
+                createpost_form.hashtag2 = request.POST['#2']
             if '#3' in request.POST:
-                h3 = request.POST['#3']
-                final+= ', #'+h3
+                createpost_form.hashtag3 = request.POST['#3']
             if '#4' in request.POST:
-                h4 = request.POST['#4']
-                final+= ', #'+h4
+                createpost_form.hashtag4 =  request.POST['#4']
             if '#5' in request.POST:
-                h5 = request.POST['#5']
-                final+= ', #'+h5
-            createpost_form.hashtag = final
+                createpost_form.hashtag5 =  request.POST['#5']
             createpost_form.profile_user = Profile.objects.filter(username=request.user).first()
             createpost_form.save()
             return redirect('feed')
@@ -120,7 +114,6 @@ class main_page(View):
 
 class search_view(View):
     def post(self,request):
-        print("TOU NA VBIEW")
         query = request.POST['search_result']
         users = Profile.objects.filter(username__contains=query)
         posts = Post.objects.filter(hashtag__contains=query)
@@ -167,17 +160,8 @@ class useredit_page(View):
             user_question_form2.profile_user = profile_user
             user_question_form2.question_name = question_name
             user_question_form2.save()
-            '''
-            question_name = user_question_form.cleaned_data['question_name'].question_name
-            question_answer = user_question_form.cleaned_data['question_answer']
-            profile_user = Profile.objects.get(username=request.user)
-            meanit_question = CreateMeanitQuestionForm()
-            meanit_question.profile_user = profile_user
-            meanit_question.question_name = question_name
-            meanit_question.question_answer = question_answer
-            meanit_question.save()
-            '''
             return redirect('home')
+
         if user_edit_form.is_valid() and user.check_password(user_edit_form.data['old_password']):
             username = user_edit_form.data['new_username']
             password = user_edit_form.data['new_password']
