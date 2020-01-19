@@ -33,7 +33,8 @@ urlpatterns = [
     url(r'^signup', views.signup_view.as_view(), name='signup'),
     url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser'),
     path('followuser/<slug:query>/', views.followuser_view.as_view(), name='hashtag'),
-
+    path('newmessage',views.message_view.as_view(),name='newmessage'),
+    path('inbox',views.inbox_view.as_view(),name='inbox')
 ]
 
 

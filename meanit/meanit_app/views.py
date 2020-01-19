@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm
+from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm, SendMessageForm
 from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post, Follow, Questions, MeanitUserQuestions
+from meanit_app.models import Profile, Post, Follow, Questions, MeanitUserQuestions, Message
 
 class home_view(View):
     def get(self, request):
@@ -231,3 +231,31 @@ class followuser_view(View):
         else:
             following.delete()
             return redirect('profile',query=query)
+
+
+class message_view(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            sendmessage_form = SendMessageForm()
+            messages = Message.objects.all().filter(to_msg=request.user.username)
+            return render(request, 'send_message.html', {'sendmessage_form': sendmessage_form})
+        else:
+            return redirect('home')
+
+    def post(self,request):
+        sendmessage_form = SendMessageForm(request.POST)
+        if sendmessage_form.is_valid():
+            sendmessage_form = sendmessage_form.save(commit=False)
+            profile_user = Profile.objects.get(username=request.user)
+            sendmessage_form.profile_user = profile_user
+            sendmessage_form.msg_read = False
+            sendmessage_form.save()
+        else:
+            print('failed')
+        return redirect('home')
+
+class inbox_view(View):
+    def get(self,request):
+        if request.user.is_authenticated:
+            messages = Message.objects.all().filter(to_msg=request.user.username)
+            return render(request, 'inbox.html', {'messages': messages})

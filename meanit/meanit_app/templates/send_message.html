@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="grelha">
+        <div class="inbox_text">
+            <a href="inbox">Inbox</a>
+        </div>
+        <div class="new_msg_text">
+                <a href="newmessage">New Message</a>
+            </div>
+        <div class="inbox">
+        <div class="frame_new_msg">
+         <form action="" method="post">
+         {% csrf_token %}
+            <div class="message_window">
+                    <label class="to" > <b>To:</b></label>
+                    <br>
+                    {{sendmessage_form.to_msg}}
+                    <br><br>
+                    <b><label class="to" ><b> Message:</b></label> {{sendmessage_form.msg_text}}  </b>
+                    <br><br>
+            </div>
+        <div id="login_botoes">
+         <input id="send_msg_btn" class="botao1" type="submit" value="Send Message">
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
