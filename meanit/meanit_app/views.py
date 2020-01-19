@@ -223,8 +223,13 @@ class useredit_page(View):
         question_form = QuestionForm()
         answer_form = CreateMeanitQuestionForm()
         user_edit_form = UserEditForm()
-        return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form, "answer_form": answer_form})
 
+        for post in Post.objects.filter(profile_user=request.user):
+            for comment in Comments.objects.filter(original_post=post):
+                if comment.cmnt_read == False:
+                    messages.add_message(request, messages.INFO, str(post.profile_user) + " has commented on one of your posts", extra_tags=str(post.pk))
+        
+        return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form, "answer_form": answer_form})
     def post(self, request):
         user_edit_form = UserEditForm(request.POST)
         user = request.user
