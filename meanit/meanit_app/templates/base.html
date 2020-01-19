@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>mean.it</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <div class="imagem">
+                <a href="{% url 'feed' %}"><img src="{% static "/images/meanit_brancodi.png" %}" height=40px></a>
+            </div>
+            <div class="search">
+                <div class="lupa">
+                    <img src="{% static "/images/procuradi.png" %}" width=40px>
+                </div>
+                <input class="procura" type="search">
+            </div>
+            <div class="utilizador">
+                <a href="{% url 'profile' request.user %}">@{{ request.user.username }}</a>
+            </div>
+            <div class="logout">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+            <div class="msg">
+                <a href="{% url 'inbox' %}"> <img src="{% static "/images/caixadi.png" %}" width=40px> </a>
+            </div>
+            <div class="sino">
+                <img src="{% static "/images/sinodi.png" %}" width=40px>
+            </div>
+            <div class="mais">
+                <a href="{% url 'post' %}">
+                    <img src="{% static "/images/maisdi.png" %}" width=40px> </a>
+            </div>
+
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

@@ -39,12 +39,11 @@ class MeanitUserQuestions(models.Model):
     question_name = models.CharField(max_length=512, blank=True, null=True)
     question_answer = models.CharField(max_length=512, blank=True, null=True)
 
-
 class Message(models.Model):
-    to_msg = models.CharField(unique=True, max_length=512)
+    to_msg = models.CharField(max_length=512)
     msg_text = models.CharField(max_length=512)
     msg_read = models.BooleanField(blank=True, null=True)
-    msg_date = models.DateField()
+    msg_date = models.DateField(blank=True, null=True, auto_now_add=True)
     profile_user = models.ForeignKey('Profile', models.CASCADE)
 
 
@@ -56,7 +55,7 @@ class Post(models.Model):
     profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
 
     def __str__(self):
-        return "User: cx" + self.profile_user.username + " Post ID: " + str(self.pk)
+        return "User: " + self.profile_user.username + " Post ID: " + str(self.pk)
 
 
 class Questions(models.Model):

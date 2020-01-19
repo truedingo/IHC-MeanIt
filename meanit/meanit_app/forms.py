@@ -1,5 +1,5 @@
 from django import forms
-from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions, Comments
+from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions, Comments, Message
 from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):
@@ -23,9 +23,10 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('post_pic', 'post_text', 'hashtag')
+        widgets = {'post_text': forms.Textarea(attrs={'id': 'input-txt'})}
 
 class LoginForm(forms.Form):
-    username = forms.EmailField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': "caixa1", 'placeholder':'username', }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "caixa1", 'placeholder': 'password'}))
 
 
@@ -44,3 +45,10 @@ class CreateMeanitQuestionForm(forms.ModelForm):
     class Meta:
         model = MeanitUserQuestions
         fields = ('question_answer',)
+
+
+class SendMessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ('to_msg', 'msg_text')
+        widgets = {'to_msg': forms.TextInput(attrs={'class': 'new_message'}),'msg_text': forms.Textarea(attrs={'class': "new_message"})}

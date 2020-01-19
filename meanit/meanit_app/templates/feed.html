@@ -1,12 +1,39 @@
-<!doctype html>
-{% if posts %}
-<div>
-    {% for p in posts %}
-        <img src="/media/{{p.post_pic}}" height="400" width="360">
-        <p>{{p.post_text}}</p>
-        <p>{{p.hashtag}}</p>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="grelha">
+        <div class="quote">
+                <a class= initial> Controversy is part of the nature of art and creativity. </a class= username>
+                    <a class= author> -Yoko Ono </a>
+                </div>
+            <div class="item1">
+        <div class="publicacao">
+            <div class="pub-imagem">
+                <img src="/media/{{p.post_pic}}">
+            </div>
+            <div class="pub-texto">
+                <a href="/user/{{p.profile_user.username}}"><b>@{{p.profile_user.username}}</b></a>
+                <p>{{p.post_text}}</p>
+            </div>
+            <div class="pub-hashtags">
+            <div class="pub-hashtag pub-hashtag1">
+                #hashtag
+            </div>
+            <div class="pub-hashtag pub-hashtag2">
+                #hashtag
+            </div>
+            <div class="pub-hashtag pub-hashtag3">
+                #hashtag
+            </div>
+            <div class="pub-hashtag pub-hashtag4">
+                #hashtag
+            </div>
+            <div class="pub-hashtag pub-hashtag5">
+                #hashtag
+            </div>
+            </div>
+            </div>
+        </div>
     {% endfor %}
 </div>
-{% else %}
-    <p>No posts are available.</p>
-{% endif %}
+{% endblock %}

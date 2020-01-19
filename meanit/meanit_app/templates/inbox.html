@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="grelha">
+        <div class="inbox_text">
+            <a href="inbox">Inbox</a>
+        </div>
+        <div class="new_msg_text">
+                <a href="newmessage">New Message</a>
+            </div>
+        <div class="inbox">
+        {% for m in messages %}
+        <div class="inbox">
+        <div class="Message">
+            <div class="texto_msg">
+                <b>From:</b> <a href="/user/{{m.profile_user.username}}">@{{m.profile_user.username}}</a>
+                    <br><br>
+                <b>Message:</b> {{m.msg_text}}
+
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+
+
+    </div>
+    </div>
+
+{% endblock %}

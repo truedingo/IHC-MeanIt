@@ -24,16 +24,18 @@ from meanit import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view.as_view(), name='home'),
-    url(r'^main_page', views.main_page.as_view(), name='mainpage'),
     url(r'logout/', views.logout_view, name='logout'),
     url(r'^feed', views.feed_view.as_view(), name='feed'),
     url(r'^post', views.post_view.as_view(), name='post'),
     path('viewpost/<slug:query>/', views.onepost_view.as_view(), name='onepost'),
     path('search/<slug:query>/', views.search_view.as_view(), name='search'),
     path('hashtag/<slug:query>/', views.hashtag_view.as_view(), name='hashtag'),
-    url(r'^my_profile', views.profile_view.as_view(), name='myprofile'),
+    path('user/<slug:query>/', views.profile_view.as_view(), name='profile'),
     url(r'^signup', views.signup_view.as_view(), name='signup'),
-    url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser')
+    url(r'^userprofileedit/', views.useredit_page.as_view(), name='edituser'),
+    path('followuser/<slug:query>/', views.followuser_view.as_view(), name='hashtag'),
+    path('newmessage',views.message_view.as_view(),name='newmessage'),
+    path('inbox',views.inbox_view.as_view(),name='inbox')
 ]
 
 

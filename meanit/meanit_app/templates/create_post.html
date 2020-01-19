@@ -1,7 +1,47 @@
-<!doctype html>
+{% extends 'base.html' %}
 {% load static %}
-<form method="post" enctype="multipart/form-data">
-{% csrf_token %}
-{{createpost_form}}
-<button type="submit" class="btn btn-black">Create</button>
-</form>
+{% block content %}
+<div class="grelha">
+    <div class="div_nome">
+        <p class="create_new_post">Create new post</p>
+    </div>
+    <div class="item2">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="publicacao2">
+                <div class="pub-imagem2">
+                    <div class="upload_img">
+                        {{ createpost_form.post_pic }}
+                    </div>
+                </div>
+                <label class="to"> <b>Write something:</b> </label>
+                <br>
+                <div class="input-txt">
+                    {{ createpost_form.post_text }}
+                </div>
+                <div class="pub-hashtags2">
+                    <div class="pub-hashtag2">
+                        #<input class="hash" type="text" name="#1">
+                    </div>
+                    <div class="pub-hashtag2">
+                        #<input class="hash" type="text" name="#2">
+                    </div>
+                    <div class="pub-hashtag2">
+                        #<input class="hash" type="text" name="#3">
+                    </div>
+                    <div class="pub-hashtag2">
+                        #<input class="hash" type="text" name="#4">
+                    </div>
+                    <div class="pub-hashtag2">
+                        #<input class="hash" type="text" name="#5">
+                    </div>
+                </div>
+                <div class="btn_post">
+                    <a><input value="Publish" class="botao2" id="publish" type="submit"></a>
+                    <a href="{% url 'feed' %}"> <input type="button" value="Cancel" class="botao2" id="cancel"></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
