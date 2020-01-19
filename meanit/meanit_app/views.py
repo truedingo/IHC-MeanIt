@@ -130,14 +130,24 @@ class useredit_page(View):
             return redirect('home')
 
         question_form = QuestionForm()
+        answer_form = CreateMeanitQuestionForm()
         user_edit_form = UserEditForm()
-        return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form})
+        return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form, "answer_form": answer_form})
 
     def post(self, request):
         user_edit_form = UserEditForm(request.POST)
         user = request.user
         user_question_form = QuestionForm(request.POST)
-        if user_question_form.is_valid():
+        user_question_form2 = CreateMeanitQuestionForm(request.POST)
+        if user_question_form.is_valid() and user_question_form2.is_valid():
+            user_question_form2 = user_question_form2.save(commit=False)
+            question_name = user_question_form.cleaned_data['question_name'].question_name
+            profile_user = Profile.objects.get(username=request.user)
+            question = Questions.objects.get(question_name=question_name)
+            user_question_form2.profile_user = profile_user
+            user_question_form2.question_name = question_name
+            user_question_form2.save()
+            '''
             question_name = user_question_form.cleaned_data['question_name'].question_name
             question_answer = user_question_form.cleaned_data['question_answer']
             profile_user = Profile.objects.get(username=request.user)
@@ -146,6 +156,7 @@ class useredit_page(View):
             meanit_question.question_name = question_name
             meanit_question.question_answer = question_answer
             meanit_question.save()
+            '''
             return redirect('home')
         if user_edit_form.is_valid() and user.check_password(user_edit_form.data['old_password']):
             username = user_edit_form.data['new_username']

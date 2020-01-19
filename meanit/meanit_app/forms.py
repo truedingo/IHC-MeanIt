@@ -37,14 +37,10 @@ class UserEditForm(forms.Form):
     new_birthday = forms.DateField(widget=forms.DateInput(attrs={'class': "caixa1", 'placeholder': 'birthday', 'type': 'date'}))
 
 
-class QuestionForm(forms.ModelForm):
+class QuestionForm(forms.Form):
     question_name =  forms.ModelChoiceField(queryset=Questions.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}), required=True)
-
-    class Meta:
-        model = Questions
-        fields = ('question_name', 'question_answer')
 
 class CreateMeanitQuestionForm(forms.ModelForm):
     class Meta:
         model = MeanitUserQuestions
-        fields = ('profile_user', 'question_name', 'question_answer')
+        fields = ('question_answer',)

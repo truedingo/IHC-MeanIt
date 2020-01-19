@@ -60,7 +60,5 @@ class Post(models.Model):
 
 class Questions(models.Model):
     question_name = models.CharField(max_length=512, blank=True, null=True)
-    question_answer = models.CharField(max_length=512, blank=True, null=True)
-
     def __str__(self):
         return self.question_name
