@@ -9,6 +9,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Profile(User):
     birthday = models.DateField()
     class Meta:
@@ -18,13 +19,13 @@ class Profile(User):
         return self.username
 
 
-
 class Comments(models.Model):
     post_pic = models.CharField(max_length=512, blank=True, null=True)
     post_text = models.CharField(max_length=512, blank=True, null=True)
     cmnt_read = models.BooleanField(blank=True, null=True)
     cmnt_date = models.BooleanField(blank=True, null=True)
-    profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
+    profile_comment = models.ForeignKey('Profile', on_delete = models.CASCADE)
+    original_post = models.ForeignKey('Post', on_delete = models.CASCADE, default = '')
 
 
 class Follow(models.Model):

@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions, Message
+from meanit_app.models import Profile, Post, Questions, MeanitUserQuestions, Comments, Message
 
 admin.site.register(Profile)
 admin.site.register(Post)
 admin.site.register(Questions)
 admin.site.register(MeanitUserQuestions)
+admin.site.register(Comments)
