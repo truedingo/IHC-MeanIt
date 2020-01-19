@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm
+from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm
 from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
-from meanit_app.models import Profile, Post, Follow
+from meanit_app.models import Profile, Post, Follow, Questions, MeanitUserQuestions
 
 class home_view(View):
     def get(self, request):
@@ -40,6 +40,7 @@ class signup_view(View):
 
     def post(self, request):
         signup_form = SignUpForm(request.POST)
+        print(signup_form)
         if signup_form.is_valid():
             signup_form = signup_form.save(commit=False)
             username = signup_form.username
@@ -54,10 +55,6 @@ class signup_view(View):
                 return redirect('signup')
         else:
             return render(request, 'signup.html', {'signup_form': signup_form})
-
-
-
-
 
 # Create your views here.
 class feed_view(View):
@@ -171,18 +168,35 @@ class useredit_page(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('home')
+
+        question_form = QuestionForm()
+        answer_form = CreateMeanitQuestionForm()
         user_edit_form = UserEditForm()
-        return render(request, 'profile_page.html', {"user_edit_form": user_edit_form})
+        return render(request, 'profile_page.html', {"question_form": question_form, "user_edit_form": user_edit_form, "answer_form": answer_form})
 
     def post(self, request):
         user_edit_form = UserEditForm(request.POST)
         user = request.user
+        user_question_form = QuestionForm(request.POST)
+        user_question_form2 = CreateMeanitQuestionForm(request.POST)
+
+        if user_question_form.is_valid() and user_question_form2.is_valid():
+            user_question_form2 = user_question_form2.save(commit=False)
+            question_name = user_question_form.cleaned_data['question_name'].question_name
+            profile_user = Profile.objects.get(username=request.user)
+            question = Questions.objects.get(question_name=question_name)
+            user_question_form2.profile_user = profile_user
+            user_question_form2.question_name = question_name
+            user_question_form2.save()
+            return redirect('home')
+
         if user_edit_form.is_valid() and user.check_password(user_edit_form.data['old_password']):
             username = user_edit_form.data['new_username']
             password = user_edit_form.data['new_password']
             user.password = make_password(user_edit_form.data['new_password'])
             user.username = user_edit_form.data['new_username']
             user.email = user_edit_form.data['new_email']
+            user.birthday = user_edit_form.data['new_birthday']
             user.save()
             user = authenticate(request, username=username, password=password)
             if user is not None:
@@ -194,7 +208,7 @@ class useredit_page(View):
             #meter erro aqui
             print('erro')
             return redirect('home')
-        
+
 
 class followuser_view(View):
     def get(self, request,query):
