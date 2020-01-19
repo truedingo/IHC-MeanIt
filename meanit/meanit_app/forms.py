@@ -34,3 +34,17 @@ class UserEditForm(forms.Form):
     new_email = forms.EmailField(label='New Email', widget=forms.TextInput(attrs={'class': "form-control"}),)
     old_password = forms.CharField(label="Old Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
     new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={'class': "form-control"}),)
+    new_birthday = forms.DateField(widget=forms.DateInput(attrs={'class': "caixa1", 'placeholder': 'birthday', 'type': 'date'}))
+
+
+class QuestionForm(forms.ModelForm):
+    question_name =  forms.ModelChoiceField(queryset=Questions.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}), required=True)
+
+    class Meta:
+        model = Questions
+        fields = ('question_name', 'question_answer')
+
+class CreateMeanitQuestionForm(forms.ModelForm):
+    class Meta:
+        model = MeanitUserQuestions
+        fields = ('profile_user', 'question_name', 'question_answer')
