@@ -2,21 +2,95 @@
 {% load static %}
 {% block content %}
 <div class="grelha">
-	<p>{{post.profile_user}}</p>
-    <img src="/media/{{post.post_pic}}" height="400" width="360">
-    <p>{{post.post_text}}</p>
-    <p>{{post.hashtag}}</p>
-Reply
-<form method="post" enctype="multipart/form-data">
-{% csrf_token %}
-<p>{{ reply_form.post_text }}</p>
-{{ reply_form.post_pic }}
-<button type="submit">Reply</button>
-</form>
+    <div class="item1">
+        <div class="publicacao">
+            <div class="pub-imagem">
+                <img src="/media/{{post.post_pic}}">
+            </div>
+            <div class="pub-texto">
+                <a href="{% url 'profile' post.profile_user %}"><b>@{{ post.profile_user }}</b></a>
+                <p>{{ post.post_text }}</p>
+            </div>
+            <div class="pub-hashtags">
+                {% if post.hashtag != '' %}
+                <div class="pub-hashtag pub-hashtag1">
+                    <a href="{% url 'hashtag' post.hashtag %}" style="color:white">{{ post.hashtag }}</a>
+                </div>
+                {% endif %}
+                {% if post.hashtag2 != '' %}
+                <div class="pub-hashtag ">
+                    <a href="{% url 'hashtag' post.hashtag2 %}" style="color:white">{{ post.hashtag2 }}</a>
+                </div>
+                {% endif %}
+                {% if post.hashtag3 != '' %}
+                <div class="pub-hashtag pub-hashtag3">
+                    <a href="{% url 'hashtag' post.hashtag3 %}" style="color:white">{{ post.hashtag3 }}</a>
+                </div>
+                {% endif %}
+                {% if post.hashtag4 != '' %}
+                <div class="pub-hashtag pub-hashtag4">
+                    <a href="{% url 'hashtag' post.hashtag4 %}" style="color:white">{{ post.hashtag4 }}</a>
+                </div>
+                {% endif %}
+                {% if post.hashtag5 != '' %}
+                <div class="pub-hashtag pub-hashtag5">
+                    <a href="{% url 'hashtag' post.hashtag5 %}" style="color:white">{{ post.hashtag5 }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% for p in posts %}
+    <div class="item3">
+        <div class="publicacao4">
+            <div class="pub-imagem69">
+                <img src="/media/{{p.post_pic}}">
+            </div>
+            <div class="pub-texto2">
+                <b>@{{p.profile_comment}}</b>
+                <p>{{p.post_text}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <div class="div_nome">
+        <p class="create_new_post">Reply</p>
+    </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="publicacao2">
+                <div class="pub-imagem2">
+                    <div class="upload_img">
+                        {{ reply_form.post_pic }}
+                    </div>
+                </div>
+                <label class="to"> <b>Write something:</b> </label>
+                <br>
+                <div class="input-txt">
+                    {{ reply_form.post_text }}
+                </div>
+                <div class="btn_post">
+                    <a><input value="Reply" class="botao2" id="publish" type="submit"></a>
+                    <a href="{% url 'feed' %}"> <input type="button" value="Cancel" class="botao2" id="cancel"></a>
+                </div>
+            </div>
+        </form>
+    <!--<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <b>Reply</b><br>
+        <b>Write Something</b>
+        <p>{{ reply_form.post_text }}</p>
+        {{ reply_form.post_pic }}
+        <button type="submit">Reply</button>
+    </form>
+-->
 
-{% for p in posts %}
-<img src="/media/{{p.post_pic}}">
-<p>{{ p.post_text }}</p>
-{% endfor %}
 </div>
 {% endblock %}

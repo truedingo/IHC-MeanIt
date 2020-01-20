@@ -64,7 +64,7 @@ class feed_view(View):
     def get(self, request):
         posts = Post.objects.all().exclude(profile_user=request.user)
         int = randint(1,6)
-        with open('/Users/franciscoferreira/Desktop/IHC-MeanIt/meanit/meanit_app/quotes.txt','r') as f:
+        with open('/Users/dingo/Desktop/Mestrado/IHC/mockups/texts/quotes.txt','r') as f:
             for i in range(int-1):
                 f.readline()
                 f.readline()
@@ -113,10 +113,9 @@ class onepost_view(View):
         createcomment_form = ReplyPostForm(request.POST, request.FILES)
         if createcomment_form.is_valid():
             createcomment_form = createcomment_form.save(commit=False)
-            createcomment_form.profile_user = Profile.objects.filter(username=request.user).first()
-            createcomment_form.original_post = Post.objects.get(pk=id)
+            createcomment_form.profile_comment = Profile.objects.get(username=request.user)
+            createcomment_form.original_post = Post.objects.filter(pk=id).first()
             createcomment_form.cmnt_read = False
-            createcomment_form.profile_comment_id = 1
             createcomment_form.save()
             post = Post.objects.filter(pk=id).first()
             replyform = ReplyPostForm()

@@ -775,6 +775,19 @@ color: #696969;
     grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
     grid-gap: 5%;
 }
+.pub-imagem69{
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 0px 0px;
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    height: 220px;
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
 .pub-imagem2>img{
     min-height: 100%;
     min-width: 100%;
