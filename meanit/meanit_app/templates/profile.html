@@ -6,10 +6,25 @@
         <p class="nome_perfil">@{{ username }}</p>
     </div>
     <div class="item1_profile">
+        {% if username == request.user.username %}
         <div class="edit_profile">
             <a href="login.html"> Edit Profile
             </a>
         </div>
+        {% else %}
+        {% if following %}
+        <div class="edit_profile">
+            <a href="{% url 'follow' username %}">
+                <img src="{% static "/images/unfollow.png" %}" style="position: relative;bottom: 12px;left: -10px;" width="30px" width=30px> </a>
+        </div>
+        {% else %}
+        <div class="edit_profile">
+        <a href="{% url 'follow' username %}">
+            <img src="{% static "/images/follow.png" %}" style="position: relative;bottom: 12px;left: -10px;" width="30px" width=30px> </a>
+            
+        </div>
+        {% endif %}
+        {% endif %}
         {% for p in posts %}
         <div class="publicacao1">
             <div class="pub-imagem">
@@ -58,60 +73,5 @@
             </div>
         </div>
         {% endfor %}
-        <div class="frame_qq">
-        </div>
-        <div class="frame_qq2">
-            <div class="div_nome">
-                <p class="Quick_questions_tittle">Quick Questions</p>
-            </div>
-            <div class="div_nome">
-                <p class="question"> Describe yourself in three words:</p>
-            </div>
-            <div class="div_nome">
-                <p class="answer">
-                    By an outlived insisted procured improved am. Paid hill fine ten now love.
-                </p>
-            </div>
-        </div>
-        <div class="frame_qq2">
-            <div class="div_nome">
-                <p class="question2"> Describe yourself in three words:</p>
-            </div>
-            <div class="div_nome">
-                <p class="answer2">
-                    By an outlived insisted procured improved am. Paid hill fine ten now love.
-                </p>
-            </div>
-        </div>
-        <div class="frame_qq2">
-            <div class="div_nome">
-                <p class="question2"> Describe yourself in three words:</p>
-            </div>
-            <div class="div_nome">
-                <p class="answer2">
-                    By an outlived insisted procured improved am. Paid hill fine ten now love.
-                </p>
-            </div>
-        </div>
-        <div class="frame_qq2">
-            <div class="div_nome">
-                <p class="question2"> Describe yourself in three words:</p>
-            </div>
-            <div class="div_nome">
-                <p class="answer2">
-                    By an outlived insisted procured improved am. Paid hill fine ten now love.
-                </p>
-            </div>
-        </div>
-        <div class="frame_qq2">
-            <div class="div_nome">
-                <p class="question2"> Describe yourself in three words:</p>
-            </div>
-            <div class="div_nome">
-                <p class="answer2">
-                    By an outlived insisted procured improved am. Paid hill fine ten now love.
-                </p>
-            </div>
-        </div>
     </div>
     {% endblock %}

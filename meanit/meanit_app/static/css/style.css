@@ -862,15 +862,8 @@ color: #696969;
 
 .follow{
     position: absolute;
-    top: -59px;
-    left: 165px;
-    width: 80%;
-}
-
-.message_user{
-    position: absolute;
-    top: -56px;
-    left: 210px;
+    top: 110px;
+    left: 185px;
     width: 80%;
     bottom: 4px;
 }
