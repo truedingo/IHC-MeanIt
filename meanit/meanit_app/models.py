@@ -20,10 +20,10 @@ class Profile(User):
 
 
 class Comments(models.Model):
-    post_pic = models.CharField(max_length=512, blank=True, null=True)
-    post_text = models.CharField(max_length=512, blank=True, null=True)
+    post_pic = models.ImageField(upload_to = 'images')
+    post_text = models.CharField(max_length=250, blank=True, null=True)
     cmnt_read = models.BooleanField(blank=True, null=True)
-    cmnt_date = models.BooleanField(blank=True, null=True)
+    cmnt_date = models.DateField(auto_now_add=True)
     profile_comment = models.ForeignKey('Profile', on_delete = models.CASCADE)
     original_post = models.ForeignKey('Post', on_delete = models.CASCADE, default = '')
 
@@ -48,7 +48,7 @@ class Message(models.Model):
 
 
 class Post(models.Model):
-    post_pic = models.ImageField(upload_to = 'images')
+    post_pic = models.ImageField(upload_to = 'images',blank=True, null=True)
     post_text = models.CharField(max_length=512, blank=True, null=True)
     hashtag = models.CharField(max_length=512, blank=True, null=True)
     hashtag2 = models.CharField(max_length=512, blank=True, null=True)

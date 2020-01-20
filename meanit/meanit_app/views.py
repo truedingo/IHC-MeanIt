@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
-from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm, SendMessageForm
+from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm, QuestionForm, CreateMeanitQuestionForm, SendMessageForm,ReplyPostForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.forms import formset_factory
 from django.contrib import messages
@@ -64,7 +64,7 @@ class feed_view(View):
     def get(self, request):
         posts = Post.objects.all().exclude(profile_user=request.user)
         int = randint(1,6)
-        with open('/Users/dingo/Desktop/Mestrado/IHC/mockups/texts/quotes.txt','r') as f:
+        with open('/Users/franciscoferreira/Desktop/IHC-MeanIt/meanit/meanit_app/quotes.txt','r') as f:
             for i in range(int-1):
                 f.readline()
                 f.readline()
@@ -103,9 +103,25 @@ class post_view(View):
         return redirect('home')
 
 class onepost_view(View):
-    def get(self, request, query):
-        post = Post.objects.filter(pk=query).first()
-        return render(request, 'post.html', {'post':post})
+    def get(self, request, id):
+        post = Post.objects.filter(pk=id).first()
+        replyform = ReplyPostForm()
+        replies = Comments.objects.all().filter(original_post=id)
+        return render(request, 'post.html', {'post':post,'reply_form': replyform,'posts': replies})
+
+    def post(self,request,id):
+        createcomment_form = ReplyPostForm(request.POST, request.FILES)
+        if createcomment_form.is_valid():
+            createcomment_form = createcomment_form.save(commit=False)
+            createcomment_form.profile_user = Profile.objects.filter(username=request.user).first()
+            createcomment_form.original_post = Post.objects.get(pk=id)
+            createcomment_form.cmnt_read = False
+            createcomment_form.profile_comment_id = 1
+            createcomment_form.save()
+            post = Post.objects.filter(pk=id).first()
+            replyform = ReplyPostForm()
+            replies = Comments.objects.all().filter(original_post=id)
+            return render(request, 'post.html', {'post': post, 'reply_form': replyform, 'posts': replies})
 
 class main_page(View):
     def get(self, request):
@@ -122,19 +138,19 @@ class search_view(View):
         for each in posts:
             w = each.hashtag
             print(w)
-            if query in w :
+            if w != None and query in w :
                     hashtags.append(w)
             w = each.hashtag2
-            if query in w :
+            if w != None and query in w :
                     hashtags.append(w)
             w = each.hashtag3
-            if query in w :
+            if w != None and query in w :
                     hashtags.append(w)
             w = each.hashtag4
-            if query in w :
+            if w != None and query in w :
                     hashtags.append(w)
             w = each.hashtag5
-            if query in w :
+            if w != None and query in w :
                     hashtags.append(w)
         return render(request,'search_response.html',{'query': query,'users': users,'hashtags': hashtags})
 
