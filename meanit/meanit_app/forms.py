@@ -52,3 +52,9 @@ class SendMessageForm(forms.ModelForm):
         model = Message
         fields = ('to_msg', 'msg_text')
         widgets = {'to_msg': forms.TextInput(attrs={'class': 'new_message'}),'msg_text': forms.Textarea(attrs={'class': "new_message"})}
+
+class ReplyPostForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('post_pic', 'post_text')
+        widgets = {'post_text': forms.Textarea(attrs={'id': 'input-txt'})}

@@ -1,7 +1,22 @@
-<!doctype html>
-<div>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="grelha">
 	<p>{{post.profile_user}}</p>
     <img src="/media/{{post.post_pic}}" height="400" width="360">
     <p>{{post.post_text}}</p>
     <p>{{post.hashtag}}</p>
+Reply
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<p>{{ reply_form.post_text }}</p>
+{{ reply_form.post_pic }}
+<button type="submit">Reply</button>
+</form>
+
+{% for p in posts %}
+<img src="/media/{{p.post_pic}}">
+<p>{{ p.post_text }}</p>
+{% endfor %}
 </div>
+{% endblock %}
