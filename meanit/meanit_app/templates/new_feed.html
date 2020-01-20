@@ -42,7 +42,9 @@
                     <a href="{% url 'hashtag' p.hashtag5 %}" style="color:white">{{ p.hashtag5 }}</a>
                 </div>
                 {% endif %}
-                <a>View More</a>
+                <div class="view_more">
+                    <a href="{% url 'profile' p.profile_user %}">View More</a>
+                </div>
             </div>
         </div>
     </div>

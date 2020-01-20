@@ -207,7 +207,8 @@ class profile_view(View):
         posts_query = Post.objects.all().filter(profile_user=user)
         p = Profile.objects.get(username = request.user)
         following = True if Follow.objects.all().filter(profile_user=p,username=query) else False
-        return render(request, 'profile.html', {'posts': posts_query, 'username':query, 'following': following})
+        questions = MeanitUserQuestions.objects.all().filter(profile_user=p)
+        return render(request, 'profile.html', {'posts': posts_query, 'username':query, 'following': following, 'questions': questions})
 
 
 

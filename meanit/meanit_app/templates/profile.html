@@ -2,76 +2,117 @@
 {% load static %}
 {% block content %}
 <div class="grelha">
-    <div class="div_nome">
-        <p class="nome_perfil">@{{ username }}</p>
-    </div>
-    <div class="item1_profile">
-        {% if username == request.user.username %}
-        <div class="edit_profile">
-            <a href="login.html"> Edit Profile
-            </a>
+    <div class="parent">
+        <div class="div_nome">
+            <p class="nome_perfil">@{{ username }}</p>
         </div>
-        {% else %}
-        {% if following %}
-        <div class="edit_profile">
-            <a href="{% url 'follow' username %}">
-                <img src="{% static "/images/unfollow.png" %}" style="position: relative;bottom: 12px;left: -10px;" width="30px" width=30px> </a>
-        </div>
-        {% else %}
-        <div class="edit_profile">
-        <a href="{% url 'follow' username %}">
-            <img src="{% static "/images/follow.png" %}" style="position: relative;bottom: 12px;left: -10px;" width="30px" width=30px> </a>
-            
-        </div>
-        {% endif %}
-        {% endif %}
-        {% for p in posts %}
-        <div class="publicacao1">
-            <div class="pub-imagem">
-                <img src="/media/{{p.post_pic}}">
+        <div class="item1_profile">
+            {% if username == request.user.username %}
+            <div class="edit_profile">
+                <a href="login.html"> Edit Profile
+                </a>
             </div>
-            <div class="edit_pub">
-                <a href="login.html">
-                    <img src="{% static "/images/lapisdi.png" %}" width=30px> </a>
+            {% else %}
+            {% if following %}
+            <div class="edit_profile">
+                <a href="{% url 'follow' username %}">
+                    <img src="{% static "/images/unfollow.png" %}" style="position: relative;bottom: 12px;left: -10px;"
+                        width="30px" width=30px> </a>
             </div>
-            <div class="delete_pub">
-                <a href="publicacao.html">
-                    <img src="{% static "/images/lixodi.png" %}" width=30px> </a>
-            </div>
-            <div class="pub-texto">
-                <a href="{% url 'profile' p.profile_user %}"><b>@{{ p.profile_user }}</b></a>
-                <p>{{ p.post_text }}</p>
-            </div>
-            <div class="pub-hashtags">
-                {% if p.hashtag != '' %}
-                <div class="pub-hashtag pub-hashtag1">
-                    <a href="{% url 'hashtag' p.hashtag %}" style="color:white">{{ p.hashtag }}</a>
-                </div>
-                {% endif %}
-                {% if p.hashtag2 != '' %}
-                <div class="pub-hashtag ">
-                    <a href="{% url 'hashtag' p.hashtag2 %}" style="color:white">{{ p.hashtag2 }}</a>
-                </div>
-                {% endif %}
-                {% if p.hashtag3 != '' %}
-                <div class="pub-hashtag pub-hashtag3">
-                    <a href="{% url 'hashtag' p.hashtag3 %}" style="color:white">{{ p.hashtag3 }}</a>
-                </div>
-                {% endif %}
-                {% if p.hashtag4 != '' %}
-                <div class="pub-hashtag pub-hashtag4">
-                    <a href="{% url 'hashtag' p.hashtag4 %}" style="color:white">{{ p.hashtag4 }}</a>
-                </div>
-                {% endif %}
-                {% if p.hashtag5 != '' %}
-                <div class="pub-hashtag pub-hashtag5">
-                    <a href="{% url 'hashtag' p.hashtag5 %}" style="color:white">{{ p.hashtag5 }}</a>
-                </div>
-                {% endif %}
-                <a>View More</a>
+            {% else %}
+            <div class="edit_profile">
+                <a href="{% url 'follow' username %}">
+                    <img src="{% static "/images/follow.png" %}" style="position: relative;bottom: 12px;left: -10px;"
+                        width="30px" width=30px> </a>
 
             </div>
+            {% endif %}
+            {% endif %}
+            {% for p in posts %}
+            <div class="publicacao1">
+                <div class="pub-imagem">
+                    <img src="/media/{{p.post_pic}}">
+                </div>
+                <div class="edit_pub">
+                    <a href="login.html">
+                        <img src="{% static "/images/lapisdi.png" %}" width=30px> </a>
+                </div>
+                <div class="delete_pub">
+                    <a href="publicacao.html">
+                        <img src="{% static "/images/lixodi.png" %}" width=30px> </a>
+                </div>
+                <div class="pub-texto">
+                    <a href="{% url 'profile' p.profile_user %}"><b>@{{ p.profile_user }}</b></a>
+                    <p>{{ p.post_text }}</p>
+                </div>
+                <div class="pub-hashtags">
+                    {% if p.hashtag != '' %}
+                    <div class="pub-hashtag pub-hashtag1">
+                        <a href="{% url 'hashtag' p.hashtag %}" style="color:white">{{ p.hashtag }}</a>
+                    </div>
+                    {% endif %}
+                    {% if p.hashtag2 != '' %}
+                    <div class="pub-hashtag ">
+                        <a href="{% url 'hashtag' p.hashtag2 %}" style="color:white">{{ p.hashtag2 }}</a>
+                    </div>
+                    {% endif %}
+                    {% if p.hashtag3 != '' %}
+                    <div class="pub-hashtag pub-hashtag3">
+                        <a href="{% url 'hashtag' p.hashtag3 %}" style="color:white">{{ p.hashtag3 }}</a>
+                    </div>
+                    {% endif %}
+                    {% if p.hashtag4 != '' %}
+                    <div class="pub-hashtag pub-hashtag4">
+                        <a href="{% url 'hashtag' p.hashtag4 %}" style="color:white">{{ p.hashtag4 }}</a>
+                    </div>
+                    {% endif %}
+                    {% if p.hashtag5 != '' %}
+                    <div class="pub-hashtag pub-hashtag5">
+                        <a href="{% url 'hashtag' p.hashtag5 %}" style="color:white">{{ p.hashtag5 }}</a>
+                    </div>
+                    {% endif %}
+                    <div class="view_more">
+                        <a href="{% url 'profile' p.profile_user %}">View More</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <div class="questions_frame">
+            <div class =" div_nome">
+                    <p class="questions_title">Quick Questions</p>
+            </div>
+            <div class="frame_question">
+                <p class="question"> Describe yourself in three words:</p>
+                <p class="answer">
+                    By an outlived insisted procured improved am. Paid hill fine ten now love.
+                </p>
+            </div>
+            <div class="frame_question2">
+                <p class="question"> Lorem ipsum dolor sit amet</p>
+                <p class="answer">
+                    Pellentesque dapibus.
+                </p>
+            </div>
+            <div class="frame_question3">
+                <p class="question"> Praesent quis ante nulla.</p>
+                <p class="answer">
+                    Nullam gravida rhoncus augue ac cursus.
+                </p>
+            </div>
+            <div class="frame_question4">
+                <p class="question"> Class taciti  ad litora torquent?</p>
+                <p class="answer">
+                    Nullam gravida rhoncus augue ac cursus.
+                </p>
+            </div>
+            <div class="frame_question5">
+                <p class="question"> Maecenas tincidunt augue sit? </p>
+                <p class="answer">
+                    Mauris nulla quam, suscipit at risus sit amet, auctor aliquet mauris. Morbi et ipsum posuere, tincidunt arcu vel, congue leo.                </p>
+            </div>
+        </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
