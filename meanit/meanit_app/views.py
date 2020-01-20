@@ -85,7 +85,6 @@ class post_view(View):
         if createpost_form.is_valid():
             profile_user = Profile.objects.get(username = request.user)
             createpost_form = createpost_form.save(commit=False)
-            final = ''
             if '#1' in request.POST:
                 createpost_form.hashtag = request.POST['#1']
             if '#2' in request.POST:

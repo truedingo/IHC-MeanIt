@@ -54,7 +54,7 @@ class Post(models.Model):
     hashtag2 = models.CharField(max_length=512, blank=True, null=True)
     hashtag3 = models.CharField(max_length=512, blank=True, null=True)
     hashtag4 = models.CharField(max_length=512, blank=True, null=True)
-    hashtag = models.CharField(max_length=512, blank=True, null=True)
+    hashtag5 = models.CharField(max_length=512, blank=True, null=True)
     post_date = models.DateField(blank=True, null=True, auto_now_add=True)
     profile_user = models.ForeignKey('Profile', on_delete = models.CASCADE)
 
