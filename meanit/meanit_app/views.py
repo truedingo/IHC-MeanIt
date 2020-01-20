@@ -5,10 +5,12 @@ from meanit_app.forms import SignUpForm, CreatePostForm, LoginForm, UserEditForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.forms import formset_factory
 from django.contrib import messages
+from django.db.models import Q
 
+from random import randint
 
 # Create your views here.
-from meanit_app.models import Profile, Post, Questions, Comments, MeanitUserQuestions, Message, Follow
+from meanit_app.models import Profile, Post, Questions, Comments, MeanitUserQuestions, Message,Follow
 class home_view(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -61,7 +63,14 @@ class signup_view(View):
 class feed_view(View):
     def get(self, request):
         posts = Post.objects.all().exclude(profile_user=request.user)
-        return render(request, 'new_feed.html',{'posts': posts})
+        int = randint(1,6)
+        with open('/Users/franciscoferreira/Desktop/IHC-MeanIt/meanit/meanit_app/quotes.txt','r') as f:
+            for i in range(int-1):
+                f.readline()
+                f.readline()
+            quote = f.readline()
+            author = f.readline()
+        return render(request, 'new_feed.html',{'posts': posts,'quote': quote,'author': author})
 
 
 class post_view(View):
@@ -106,25 +115,35 @@ class main_page(View):
 
 
 class search_view(View):
-    def get(self,request,query):
-        users = Profile.objects.filter(username__contains=query)
-        posts = Post.objects.filter(hashtag__contains=query)
+    def post(self,request):
+        query = request.POST['search_result']
+        users = Profile.objects.all().filter(username__contains=query)
+        posts = Post.objects.all()
         hashtags = []
         for each in posts:
-            for w in each.hashtag.split(' '):
-                if query in w and w[1:] not in hashtags:
-                    print(w)
-                    print(hashtags)
-                    print('----------')
-                    hashtags.append(w[1:])
-
+            w = each.hashtag
+            print(w)
+            if query in w :
+                    hashtags.append(w)
+            w = each.hashtag2
+            if query in w :
+                    hashtags.append(w)
+            w = each.hashtag3
+            if query in w :
+                    hashtags.append(w)
+            w = each.hashtag4
+            if query in w :
+                    hashtags.append(w)
+            w = each.hashtag5
+            if query in w :
+                    hashtags.append(w)
         return render(request,'search_response.html',{'query': query,'users': users,'hashtags': hashtags})
 
 
 class hashtag_view(View):
     def get(self,request,query):
-        posts = Post.objects.filter(hashtag__contains=query+' ')
-        return render(request,'hashtag_feed.html',{'hashtag':query,'posts': posts})
+        posts = Post.objects.all().filter(Q(hashtag=query) |Q(hashtag2=query) |Q(hashtag3=query)|Q(hashtag4=query)|Q(hashtag5=query))
+        return render(request,'new_feed.html',{'posts': posts})
 
 class useredit_page(View):
     def get(self, request):

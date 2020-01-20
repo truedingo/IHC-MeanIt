@@ -13,10 +13,14 @@
                 <a href="{% url 'feed' %}"><img src="{% static "/images/meanit_brancodi.png" %}" height=40px></a>
             </div>
             <div class="search">
+            <form action="/search" method="post">
+            {% csrf_token %}
                 <div class="lupa">
-                    <img src="{% static "/images/procuradi.png" %}" width=40px>
+                    <input type="image" src="{% static "/images/procuradi.png" %}" width=40px alt="Submit">
+
                 </div>
-                <input class="procura" type="search">
+                <input id="search" class="procura" type="search" name="search_result">
+                </form>
             </div>
             <div class="utilizador">
                 <a href="{% url 'profile' request.user %}">@{{ request.user.username }}</a>
