@@ -60,14 +60,7 @@ class signup_view(View):
 # Create your views here.
 class feed_view(View):
     def get(self, request):
-        posts = Post.objects.all()
-        '''profile_user = Profile.objects.get(username=request.user)
-        follow_list = Follow.objects.filter(profile_user=profile_user)
-        for followers in follow_list:
-            prof = Profile.objects.get(profile_user=followers.username)
-            hashtag = follow_list.hashtag
-            follow_post = Post.objects.filter()
-        '''
+        posts = Post.objects.all().exclude(profile_user=request.user)
         return render(request, 'new_feed.html',{'posts': posts})
 
 
@@ -130,7 +123,6 @@ class search_view(View):
 
 class hashtag_view(View):
     def get(self,request,query):
-        print("jshdjsadhsakj")
         posts = Post.objects.filter(hashtag__contains=query+' ')
         return render(request,'hashtag_feed.html',{'hashtag':query,'posts': posts})
 
