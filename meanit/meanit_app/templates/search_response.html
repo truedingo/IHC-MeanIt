@@ -2,18 +2,12 @@
 {% load static %}
 {% block content %}
 <body>
-<h2>{{query}}</h2>
-{% if users %}
-<div class="publicacao">
+<div class="grelha">
     {% for u in users %}
-        <a href="user/{{u.username}}"><p>@{{u.username}}</p></a>
+    <div class="div_nome"><a href="user/{{u.username}}"><p >@{{u.username}}</p></a></div>
     {% endfor %}
-</div>
-{% else %}
-    <p>No users found</p>
-{% endif %}
     {% for h in hashtags %}
-        <a href="/hashtag/{{h}}"><p>#{{ h }}</p></a>
+    <div class="div_nome"><a href="hashtag/{{h}}"><p>#{{ h }}</p></a></div>
     {% endfor %}
 </div>
 </body>
