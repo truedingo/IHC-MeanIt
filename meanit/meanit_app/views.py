@@ -64,7 +64,7 @@ class feed_view(View):
     def get(self, request):
         posts = Post.objects.all().exclude(profile_user=request.user)
         int = randint(1,6)
-        with open('/Users/franciscoferreira/Desktop/IHC-MeanIt/meanit/meanit_app/quotes.txt','r') as f:
+        with open('/Users/dingo/Desktop/Mestrado/IHC/mockups/texts/quotes.txt','r') as f:
             for i in range(int-1):
                 f.readline()
                 f.readline()

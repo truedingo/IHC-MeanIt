@@ -4,7 +4,7 @@
 <div class="grelha">
     <div class="quote">
         <a class=initial>{{quote}} </a class=username>
-        <a class=author> -{{author}} </a class=username>
+        <a class=author> {{author}} </a class=username>
     </div>
     {% for p in posts %}
     <div class="item1">
@@ -42,6 +42,7 @@
                     <a href="{% url 'hashtag' p.hashtag5 %}" style="color:white">{{ p.hashtag5 }}</a>
                 </div>
                 {% endif %}
+                <a>View More</a>
             </div>
         </div>
     </div>

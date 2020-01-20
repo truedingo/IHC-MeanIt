@@ -153,6 +153,9 @@
 .logout>a:link{
     color:white;
 }
+.logout>a:hover{
+    color:lightgray;
+}
 
 .utilizador>a:visited{
     color: white;
@@ -160,6 +163,10 @@
 .utilizador>a:link{
     color: white;
 }
+.utilizador>a:hover{
+    color:lightgray;
+}
+
 @media only screen and (max-width: 850px) {
     .mais, .sino, .msg{
         width: 40px;
@@ -259,6 +266,7 @@
     display: inline-block;
     grid-column-start: 1;
     grid-column-end: 6;
+    object-fit: cover;
 }
 .pub-imagem>img{
     min-height: 100%;
@@ -300,7 +308,7 @@ b{
 .nome_perfil{
     position: relative;
     font-size: 26px;
-    right: 300px;
+    right: 290px;
 }
 @media only screen and (max-width: 527px) {
     .publicacao{
@@ -623,11 +631,12 @@ color: #696969;
 }
 
 .Quick_questions_tittle{
-    position: absolute;
+    position: relative;
     font-size: 26px;
-    left: 525px;
     width: 100%;
-    bottom: 4px;
+    bottom: 210px;
+    text-align: center;
+    right: 135px;
 }
 
 .create_new_post{
@@ -635,4 +644,233 @@ color: #696969;
     font-size: 26px;
     text-align: center;
     margin: auto;
+}
+
+.edit_pub{
+    position: absolute;
+    top: 435px;
+    left: 503px;
+    opacity: 70%;
+}
+
+.delete_pub{
+    position: absolute;
+    top: 435px;
+    left: 470px;
+    opacity: 70%;
+}
+
+
+.edit_profile{
+    position: absolute;
+    font-size: 16px;
+    top: 123px;
+    left: 180px;
+    width: 100%;
+    bottom: 4px;
+}
+
+.edit_profile>a:visited{
+    color: #696969;
+}
+.edit_profile>a:link{
+    color:#696969;
+}
+.edit_profile>a:hover{
+    color:lightgray;
+}
+
+.frame_qq{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    height: 190%;
+    width: 60%;
+    position: relative;
+    top: -342px;
+    left: 800px;
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-gap: 5%;
+
+}
+
+.frame_qq2{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    height: 25%;
+    width: 55%;
+    position: relative;
+    bottom: 1300px;
+    left: 814px;
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-gap: 5%;
+}
+
+.question{
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    width: 55%;
+    text-align: center ;
+    right: 165px;
+    bottom: 150px;
+}
+
+.answer{
+    position: relative;
+    text-align: center ;
+    margin: auto;
+    color: black;
+    font-size: 16px;
+    width: 55%;
+    font-weight: lighter;
+    right: 195px;
+    bottom: 110px;
+}
+
+.question2{
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    width: 55%;
+    text-align: center ;
+    right: 135px;
+    bottom: 150px;
+}
+
+.answer2{
+    position: relative;
+    text-align: center ;
+    margin: auto;
+    color: black;
+    font-size: 16px;
+    width: 55%;
+    font-weight: lighter;
+    right: 165px;
+    bottom: 110px;
+}
+
+
+.question3{
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    width: 55%;
+    text-align: center ;
+    right: 135px;
+    bottom: 150px;
+}
+
+.answer3{
+    position: relative;
+    text-align: center ;
+    margin: auto;
+    color: black;
+    font-size: 16px;
+    width: 55%;
+    font-weight: lighter;
+    right: 165px;
+    bottom: 110px;
+}
+
+.div_nome>p>img{
+    padding: 0px 10px;
+}
+.pub-texto>img{
+    float: right;
+    margin: 0px 0px 10px 10px;
+    align-content: center;
+}
+#nots{
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    width: 500px;
+    font-size: 20pt;
+    text-align: center;
+    overflow: hidden;
+    margin: auto;
+    position: relative;
+    top: 100px;
+}
+#not{
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    color: gray;
+}
+#not>a{
+    color: lightgray;
+}
+.item3{
+    height: 290px;
+    width: 390px;
+    margin: auto;
+}
+.publicacao4{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    height: 90%;
+    position: relative;
+    top: 80;
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5% 5% 5% 5% 5% 5% 5%;
+    grid-gap: 5%;
+}
+.pub-imagem2>img{
+    min-height: 100%;
+    min-width: 100%;
+    max-height: 200%;
+    max-width: 200%;
+}
+.pub-texto2{
+    width: 90%;
+    font-size: 7pt;
+    height: 220px;
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    grid-column-start: 6;
+    grid-column-end: 11;
+}
+.pub-hashtag-2{
+    padding: 5px;
+    background-color: lightgray;
+    color: white;
+    border-radius: 20px;  
+    width: -webkit-fit-content;
+    height: -webkit-fit-content;
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+    display: inline-block;
+    font-size: 8pt
+}
+.pub-hashtags3{
+    grid-column-start: 1;
+    grid-column-end: 11;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.follow{
+    position: absolute;
+    top: -59px;
+    left: 165px;
+    width: 80%;
+}
+
+.message_user{
+    position: absolute;
+    top: -56px;
+    left: 210px;
+    width: 80%;
+    bottom: 4px;
 }
